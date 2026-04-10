@@ -92,26 +92,45 @@
             opacity: 0.6;
         }
 
-        /* FAB Styles */
-        .fab {
+        /* Speed Dial Menu Styles */
+        .menu-container {
             position: fixed;
             bottom: 30px;
+            right: 30px;
             z-index: 90;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sub-fab {
+            width: 50px;
+            height: 50px;
             background: white;
-            width: 60px;
-            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px) scale(0.5);
+            pointer-events: none;
+        }
+
+        .main-fab {
+            width: 60px;
+            height: 60px;
+            background: #1c1917; /* stone-900 */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
             transition: transform 0.3s ease;
         }
-        .fab:hover { transform: scale(1.1); }
-        .fab:active { transform: scale(0.95); }
-
-        #view-button { left: 30px; }
-        #heart-generator { right: 30px; }
 
         .floating-heart-emoji {
             position: absolute;
@@ -191,29 +210,68 @@
 
     </main>
 
-    <a id="view-button" href="https://drive.google.com/file/d/19TwSY9cHA_DjFFMJq0TG2vYfWgprMP-3/view?usp=drivesdk" target="_blank" class="fab">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
-    </a>
+    <div class="menu-container">
+        <a href="https://drive.google.com/file/d/19TwSY9cHA_DjFFMJq0TG2vYfWgprMP-3/view?usp=drivesdk" target="_blank" class="sub-fab hover:bg-stone-100 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+        </a>
 
-    <div id="heart-generator" onclick="spawnFloatingHearts()" class="fab">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
+        <div onclick="spawnFloatingHearts()" class="sub-fab cursor-pointer hover:bg-stone-100 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </div>
+
+        <div id="menu-toggle" class="main-fab" onclick="toggleMenu()">
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+        </div>
     </div>
 
     <div id="hearts-container" class="fixed inset-0 pointer-events-none z-50"></div>
 
     <script>
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            const subFabs = document.querySelectorAll('.sub-fab');
+            const icon = document.getElementById('menu-icon');
+
+            if (isMenuOpen) {
+                gsap.to(subFabs, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    stagger: 0.1,
+                    pointerEvents: 'auto',
+                    ease: "back.out(1.7)",
+                    duration: 0.4
+                });
+                icon.style.transform = 'rotate(45deg)';
+            } else {
+                gsap.to(subFabs, {
+                    opacity: 0,
+                    y: 20,
+                    scale: 0.5,
+                    stagger: 0.1,
+                    pointerEvents: 'none',
+                    ease: "power2.in",
+                    duration: 0.3
+                });
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Previous Page Functions
         window.addEventListener('load', () => {
-            const tl = gsap.timeline();
-            tl.to("#loader", {
+            gsap.to("#loader", {
                 opacity: 0,
                 duration: 1.2,
                 delay: 1.5,
-                ease: "power2.inOut",
                 onComplete: () => {
                     document.getElementById('loader').style.display = 'none';
                     revealContent();
@@ -222,65 +280,36 @@
         });
 
         function revealContent() {
-            gsap.from(".reveal", {
-                y: 40,
-                opacity: 0,
-                duration: 1.8,
-                stagger: 0.3,
-                ease: "power4.out"
-            });
+            gsap.from(".reveal", { y: 40, opacity: 0, duration: 1.8, stagger: 0.3, ease: "power4.out" });
         }
 
         function celebrate() {
             const end = Date.now() + (2 * 1000);
             const colors = ['#065f46', '#fbbf24', '#ffffff', '#d97706'];
-
             (function frame() {
-                confetti({
-                    particleCount: 3,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 3,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
 
         function spawnFloatingHearts() {
             const container = document.getElementById('hearts-container');
-            const heartCount = 15;
-
-            for (let i = 0; i < heartCount; i++) {
+            for (let i = 0; i < 15; i++) {
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
                 heart.className = 'floating-heart-emoji text-2xl';
                 container.appendChild(heart);
-
                 const startX = window.innerWidth - 60 - (Math.random() * 40);
                 const startY = window.innerHeight - 60 - (Math.random() * 30);
-
                 gsap.set(heart, { x: startX, y: startY, opacity: 1 });
-
                 gsap.to(heart, {
-                    y: startY - (150 + Math.random() * 200),
+                    y: startY - (200 + Math.random() * 200),
                     x: startX + (Math.random() - 0.5) * 100,
                     opacity: 0,
-                    duration: 1 + Math.random() * 1.5,
+                    duration: 1.5 + Math.random(),
                     ease: "power1.out",
-                    onComplete: () => {
-                        heart.remove();
-                    }
+                    onComplete: () => heart.remove()
                 });
             }
         }
