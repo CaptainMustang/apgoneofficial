@@ -3,56 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ankita & Prasant | 10.05.2026</title>
+    <title>Prasant & Ankita | The Union</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <div class="loader"><span>An auspicious occasion</span></div>
 
-    <div class="music-control" onclick="toggleMusic()">
-        <i id="music-icon" class="fas fa-volume-mute"></i>
-    </div>
+    <nav class="nav-bar">
+        <div class="nav-logo">P + A</div>
+        <div class="nav-date">10.05.2026</div>
+    </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <svg class="floral-svg" viewBox="0 0 100 100">
-                <path d="M50 10 Q70 10 70 30 T50 50 T30 30 T50 10" fill="none" stroke="gold" stroke-width="0.5"/>
-            </svg>
-            <h1 class="fade-in">Ankita & Prasant</h1>
-            <p class="subtitle">Are Getting Married</p>
-            <div class="date">May 10, 2026</div>
+    <header class="hero">
+        <div class="hero-wrapper">
+            <h1 class="split-text">
+                <span class="word">Prasant</span>
+                <span class="amp">&</span>
+                <span class="word">Ankita</span>
+            </h1>
+            <p class="hero-sub">Inviting you to share in our profound joy</p>
         </div>
-    </section>
-
-    <section class="countdown-section">
-        <h2>Counting Down to the Big Day</h2>
-        <div id="countdown">
-            <div class="time-box"><span id="days">00</span><p>Days</p></div>
-            <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
-            <div class="time-box"><span id="minutes">00</span><p>Min</p></div>
-            <div class="time-box"><span id="seconds">00</span><p>Sec</p></div>
-        </div>
-    </section>
+    </header>
 
     <section class="details">
-        <div class="card fade-in">
-            <i class="fas fa-church"></i>
-            <h3>The Ceremony</h3>
-            <p>Join us as we exchange vows.</p>
-            <p><strong>Time:</strong> 10:00 AM</p>
-        </div>
-        <div class="card fade-in">
-            <i class="fas fa-utensils"></i>
-            <h3>The Feast</h3>
-            <p>Enjoy a curated multi-course menu.</p>
-            <p><strong>Time:</strong> 01:00 PM</p>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <div class="detail-block" id="confetti-trigger">
+            <span class="label">Date</span>
+            <h2 class="animate-on-click">10th May, 2026

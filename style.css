@@ -1,101 +1,77 @@
 :root {
-    --gold: #d4af37;
-    --dark: #2c3e50;
-    --white: #ffffff;
+    --primary: #1a1a1a;
+    --accent: #d4af37;
+    --bg: #fdfcf9;
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    background-color: #fcfbf7;
-    color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg);
+    color: var(--primary);
     overflow-x: hidden;
+}
+
+/* Loader Animation */
+.loader {
+    position: fixed;
+    height: 100vh; width: 100%;
+    background: var(--primary);
+    color: white;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+    animation: fadeOut 1.5s forwards 2s;
+}
+
+.nav-bar {
+    position: fixed; top: 0; width: 100%;
+    padding: 30px 50px;
+    display: flex; justify-content: space-between;
+    font-size: 14px; letter-spacing: 2px;
+    z-index: 100;
 }
 
 .hero {
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
-                url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80');
-    background-size: cover;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 10%;
 }
 
-.hero-content h1 {
-    font-size: 4rem;
-    margin: 0;
-    color: var(--gold);
-    animation: fadeInUp 2s ease-out;
-}
-
-.countdown-section {
-    padding: 50px 20px;
-    background: var(--dark);
-    color: var(--white);
+.split-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 1.1;
     text-align: center;
 }
 
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.split-text .word { display: block; opacity: 0; transform: translateY(50px); animation: fadeInUp 1s forwards 2.5s; }
+.split-text .amp { color: var(--accent); font-style: italic; opacity: 0; animation: fadeIn 1s forwards 3s; }
+
+.details { padding: 100px 10%; }
+
+.detail-block {
+    margin-bottom: 80px;
+    opacity: 0; transform: translateY(30px);
+    transition: all 1s ease-out;
 }
 
-.time-box {
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 10px;
-    min-width: 80px;
-}
+.detail-block.visible { opacity: 1; transform: translateY(0); }
 
-.time-box span { font-size: 2rem; display: block; color: var(--gold); }
+.label { color: var(--accent); text-transform: uppercase; font-size: 12px; letter-spacing: 3px; display: block; margin-bottom: 10px; }
 
-.details {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 50px;
-    gap: 30px;
-}
+h2 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; cursor: pointer; }
 
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    text-align: center;
-    width: 300px;
-    transition: transform 0.3s;
-}
+.family-section { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 50px; }
 
-.card:hover { transform: translateY(-10px); }
-.card i { font-size: 3rem; color: var(--gold); margin-bottom: 15px; }
+.animate-on-click:active { transform: scale(0.95); transition: 0.1s; }
 
-.music-control {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--gold);
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-}
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+@keyframes fadeIn { to { opacity: 1; } }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Mobile Responsive */
-@media (max-width: 600px) {
-    .hero-content h1 { font-size: 2.5rem; }
-    #countdown { flex-wrap: wrap; }
+@media (max-width: 768px) {
+    .family-section { grid-template-columns: 1fr; }
+    .nav-bar { padding: 20px; }
 }

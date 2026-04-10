@@ -1,36 +1,28 @@
-// Countdown Logic
-const weddingDate = new Date("May 10, 2026 10:00:00").getTime();
+// Reveal elements on scroll
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
 
-const timer = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
+document.querySelectorAll('.detail-block').forEach(block => observer.observe(block));
 
-    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distance % (1000 * 60)) / 1000);
+// Interactive Confetti & Scale Animation
+const dateTrigger = document.getElementById('confetti-trigger');
 
-    document.getElementById("days").innerText = d;
-    document.getElementById("hours").innerText = h;
-    document.getElementById("minutes").innerText = m;
-    document.getElementById("seconds").innerText = s;
-
-    if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById("countdown").innerHTML = "HAPPY WEDDING DAY!";
-    }
-}, 1000);
-
-// Music Control
-function toggleMusic() {
-    const music = document.getElementById("bg-music");
-    const icon = document.getElementById("music-icon");
+dateTrigger.addEventListener('click', () => {
+    // Elegant gold/white confetti
+    confetti({
+        particleCount: 100,
+        spread: 100,
+        origin: { y: 0.8 },
+        colors: ['#d4af37', '#ffffff', '#1a1a1a']
+    });
     
-    if (music.paused) {
-        music.play();
-        icon.classList.replace("fa-volume-mute", "fa-volume-up");
-    } else {
-        music.pause();
-        icon.classList.replace("fa-volume-up", "fa-volume-mute");
-    }
-}
+    // Add a quick haptic-style visual pulse
+    dateTrigger.style.transform = 'scale(1.05)';
+    setTimeout(() => dateTrigger.style.transform = 'scale(1)', 200);
+});
