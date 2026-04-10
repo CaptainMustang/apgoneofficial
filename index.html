@@ -1,8 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankita & Prasant | 10.05.2026</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
 <body>
-    <h1>Hello World! My GitHub Page is live.</h1>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control" onclick="toggleMusic()">
+        <i id="music-icon" class="fas fa-volume-mute"></i>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <svg class="floral-svg" viewBox="0 0 100 100">
+                <path d="M50 10 Q70 10 70 30 T50 50 T30 30 T50 10" fill="none" stroke="gold" stroke-width="0.5"/>
+            </svg>
+            <h1 class="fade-in">Ankita & Prasant</h1>
+            <p class="subtitle">Are Getting Married</p>
+            <div class="date">May 10, 2026</div>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <h2>Counting Down to the Big Day</h2>
+        <div id="countdown">
+            <div class="time-box"><span id="days">00</span><p>Days</p></div>
+            <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
+            <div class="time-box"><span id="minutes">00</span><p>Min</p></div>
+            <div class="time-box"><span id="seconds">00</span><p>Sec</p></div>
+        </div>
+    </section>
+
+    <section class="details">
+        <div class="card fade-in">
+            <i class="fas fa-church"></i>
+            <h3>The Ceremony</h3>
+            <p>Join us as we exchange vows.</p>
+            <p><strong>Time:</strong> 10:00 AM</p>
+        </div>
+        <div class="card fade-in">
+            <i class="fas fa-utensils"></i>
+            <h3>The Feast</h3>
+            <p>Enjoy a curated multi-course menu.</p>
+            <p><strong>Time:</strong> 01:00 PM</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html>
